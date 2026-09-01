@@ -1,4 +1,4 @@
 package com.learning.orderplatform.order.domain;
 
-public class DomainEvent {
+public interface DomainEvent {
 }

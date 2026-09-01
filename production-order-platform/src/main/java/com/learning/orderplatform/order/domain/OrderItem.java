@@ -1,4 +1,4 @@
 package com.learning.orderplatform.order.domain;
 
-public class OrderItem {
+public record OrderItem(ProductId productId, int quantity) {
 }
