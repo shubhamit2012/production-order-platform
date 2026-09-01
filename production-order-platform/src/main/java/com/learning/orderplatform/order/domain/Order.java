@@ -21,7 +21,7 @@ public class Order {
         this.createdAt = createdAt;
     }
 
-    public OrderId orderId() {
+    public OrderId id() {
         return this.id;
     }
 
@@ -29,7 +29,7 @@ public class Order {
         return this.customerId;
     }
 
-    public OrderStatus orderStatus() {
+    public OrderStatus status() {
         return this.status;
     }
 
@@ -47,7 +47,7 @@ public class Order {
         return events;
     }
 
-    public static Order create(OrderId orderId, CustomerId customerId, List<OrderItem> items, Instant createdAt) {
+    public static Order create(OrderId id, CustomerId customerId, List<OrderItem> items, Instant createdAt) {
         if (items == null || items.isEmpty()) {
             throw new IllegalArgumentException("items cannot be null or empty");
         }
@@ -58,8 +58,8 @@ public class Order {
             }
         }
 
-        DomainEvent orderCreatedEvent = new OrderCreatedEvent(orderId, customerId, createdAt);
-        Order order = new Order(orderId, customerId, items, createdAt);
+        DomainEvent orderCreatedEvent = new OrderCreatedEvent(id, customerId, createdAt);
+        Order order = new Order(id, customerId, items, createdAt);
         order.domainEvents.add(orderCreatedEvent);
         return order;
     }
