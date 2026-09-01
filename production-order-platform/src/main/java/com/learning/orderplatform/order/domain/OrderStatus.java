@@ -1,4 +1,5 @@
 package com.learning.orderplatform.order.domain;
 
-public class OrderStatus {
+public enum OrderStatus {
+    CREATED,
 }
