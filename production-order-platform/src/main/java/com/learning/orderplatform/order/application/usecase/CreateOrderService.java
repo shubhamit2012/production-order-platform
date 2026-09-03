@@ -1,12 +1,20 @@
 package com.learning.orderplatform.order.application.usecase;
 
 import com.learning.orderplatform.order.application.model.CreateOrderCommand;
+import com.learning.orderplatform.order.application.model.CreateOrderItem;
+import com.learning.orderplatform.order.application.model.InventoryReservationRequest;
 import com.learning.orderplatform.order.application.port.in.CreateOrderUseCase;
 import com.learning.orderplatform.order.application.port.out.InventoryGateway;
 import com.learning.orderplatform.order.application.port.out.OrderIdGenerator;
 import com.learning.orderplatform.order.application.port.out.OrderRepository;
+import com.learning.orderplatform.order.domain.Order;
 import com.learning.orderplatform.order.domain.OrderId;
+import com.learning.orderplatform.order.domain.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateOrderService implements CreateOrderUseCase {
 
@@ -23,7 +31,23 @@ public class CreateOrderService implements CreateOrderUseCase {
 
     @Override
     public OrderId create(CreateOrderCommand command) {
-        return null;
+        OrderId orderId = orderIdGenerator.next();
+
+        List<InventoryReservationRequest> reservationRequests = new ArrayList<>();
+        for (CreateOrderItem item : command.items()) {
+            reservationRequests.add(new InventoryReservationRequest(item.productId(), item.quantity()));
+        }
+        inventoryGateway.reserve(reservationRequests);
+
+        List<OrderItem> orderItems = new ArrayList<>();
+        for (CreateOrderItem item : command.items()) {
+            orderItems.add(new OrderItem(item.productId(), item.quantity()));
+        }
+
+        Order order = Order.create(orderId, command.customerId(), orderItems, Instant.now());
+        orderRepository.save(order);
+
+        return order.id();
     }
 
 }
