@@ -1,29 +1,28 @@
 package com.learning.orderplatform.order.api;
 
 import com.learning.orderplatform.order.application.model.CreateOrderItem;
-import com.learning.orderplatform.order.domain.CustomerId;
 
 import java.time.Instant;
 import java.util.List;
 
 public class CreateOrderRequest {
 
-    private CustomerId customerId;
-    private List<CreateOrderItem> orderItems;
+    private String customerId;
+    private List<CreateOrderItem> items;
     private Instant createdAt;
 
-    public CreateOrderRequest(CustomerId customerId, List<CreateOrderItem> orderItems, Instant createdAt) {
+    public CreateOrderRequest(String customerId, List<CreateOrderItem> items, Instant createdAt) {
         this.customerId = customerId;
-        this.orderItems = orderItems;
+        this.items = items;
         this.createdAt = createdAt;
     }
 
-    public CustomerId customerId() {
+    public String customerId() {
         return customerId;
     }
 
     public List<CreateOrderItem> orderItems() {
-        return orderItems;
+        return items;
     }
 
     public Instant createdAt() {
