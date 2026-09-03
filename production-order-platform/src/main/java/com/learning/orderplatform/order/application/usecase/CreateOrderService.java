@@ -21,7 +21,6 @@ public class CreateOrderService implements CreateOrderUseCase {
     private final InventoryGateway inventoryGateway;
     private final OrderRepository orderRepository;
 
-    @Autowired
     public CreateOrderService(OrderIdGenerator orderIdGenerator, InventoryGateway inventoryGateway, OrderRepository orderRepository) {
         this.orderIdGenerator = orderIdGenerator;
         this.inventoryGateway = inventoryGateway;
@@ -45,7 +44,7 @@ public class CreateOrderService implements CreateOrderUseCase {
                 .map(item -> new OrderItem(item.productId(), item.quantity()))
                 .toList();
 
-        Order order = Order.create(orderId, command.customerId(), orderItems, Instant.now());
+        Order order = Order.create(orderId, command.customerId(), orderItems, command.createdAt());
         orderRepository.save(order);
 
         return order.id();
