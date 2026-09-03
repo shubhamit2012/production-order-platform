@@ -1,7 +1,7 @@
 package com.learning.orderplatform.order.application.usecase;
 
+import com.learning.orderplatform.order.domain.exceptions.InsufficientInventoryException;
 import com.learning.orderplatform.order.application.model.CreateOrderCommand;
-import com.learning.orderplatform.order.application.model.CreateOrderItem;
 import com.learning.orderplatform.order.application.model.InventoryReservationRequest;
 import com.learning.orderplatform.order.application.port.in.CreateOrderUseCase;
 import com.learning.orderplatform.order.application.port.out.InventoryGateway;
@@ -13,7 +13,6 @@ import com.learning.orderplatform.order.domain.OrderItem;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CreateOrderService implements CreateOrderUseCase {
@@ -30,19 +29,21 @@ public class CreateOrderService implements CreateOrderUseCase {
     }
 
     @Override
-    public OrderId create(CreateOrderCommand command) {
+    public OrderId create(CreateOrderCommand command) throws InsufficientInventoryException {
         OrderId orderId = orderIdGenerator.next();
 
-        List<InventoryReservationRequest> reservationRequests = new ArrayList<>();
-        for (CreateOrderItem item : command.items()) {
-            reservationRequests.add(new InventoryReservationRequest(item.productId(), item.quantity()));
-        }
-        inventoryGateway.reserve(reservationRequests);
+        List<InventoryReservationRequest> reservationRequests = command.items().stream()
+                .map(item -> new InventoryReservationRequest(item.productId(), item.quantity()))
+                .toList();
 
-        List<OrderItem> orderItems = new ArrayList<>();
-        for (CreateOrderItem item : command.items()) {
-            orderItems.add(new OrderItem(item.productId(), item.quantity()));
+        boolean reserve = inventoryGateway.reserve(reservationRequests);
+        if (!reserve) {
+            throw new InsufficientInventoryException("Inventory reservation failed");
         }
+
+        List<OrderItem> orderItems = command.items().stream()
+                .map(item -> new OrderItem(item.productId(), item.quantity()))
+                .toList();
 
         Order order = Order.create(orderId, command.customerId(), orderItems, Instant.now());
         orderRepository.save(order);
