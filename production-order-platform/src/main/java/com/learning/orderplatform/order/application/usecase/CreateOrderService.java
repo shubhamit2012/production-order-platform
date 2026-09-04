@@ -1,6 +1,5 @@
 package com.learning.orderplatform.order.application.usecase;
 
-import com.learning.orderplatform.order.domain.exceptions.InsufficientInventoryException;
 import com.learning.orderplatform.order.application.model.CreateOrderCommand;
 import com.learning.orderplatform.order.application.model.InventoryReservationRequest;
 import com.learning.orderplatform.order.application.port.in.CreateOrderUseCase;
@@ -10,9 +9,8 @@ import com.learning.orderplatform.order.application.port.out.OrderRepository;
 import com.learning.orderplatform.order.domain.Order;
 import com.learning.orderplatform.order.domain.OrderId;
 import com.learning.orderplatform.order.domain.OrderItem;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.learning.orderplatform.order.domain.exceptions.InsufficientInventoryException;
 
-import java.time.Instant;
 import java.util.List;
 
 public class CreateOrderService implements CreateOrderUseCase {
