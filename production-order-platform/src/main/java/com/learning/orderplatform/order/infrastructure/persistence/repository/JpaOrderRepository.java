@@ -1,10 +1,9 @@
-package com.learning.orderplatform.order.infrastructure.persistence;
+package com.learning.orderplatform.order.infrastructure.persistence.repository;
 
 import com.learning.orderplatform.order.application.port.out.OrderRepository;
 import com.learning.orderplatform.order.domain.Order;
 import com.learning.orderplatform.order.infrastructure.persistence.entity.OrderEntity;
 import com.learning.orderplatform.order.infrastructure.persistence.mapper.OrderEntityMapper;
-import com.learning.orderplatform.order.infrastructure.persistence.spring.OrderEntityRepository;
 
 public class JpaOrderRepository implements OrderRepository {
 

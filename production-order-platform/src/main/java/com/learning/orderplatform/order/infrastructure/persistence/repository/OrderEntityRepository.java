@@ -1,4 +1,4 @@
-package com.learning.orderplatform.order.infrastructure.persistence.spring;
+package com.learning.orderplatform.order.infrastructure.persistence.repository;
 
 import com.learning.orderplatform.order.infrastructure.persistence.entity.OrderEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

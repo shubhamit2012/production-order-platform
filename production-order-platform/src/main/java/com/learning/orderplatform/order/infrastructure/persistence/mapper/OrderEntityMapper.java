@@ -9,15 +9,14 @@ import java.util.List;
 
 public class OrderEntityMapper {
 
-    private List<OrderItemEntity> toOrderItemEntity(List<OrderItem> orderItems) {
-        return orderItems.stream()
-                .map(item -> new OrderItemEntity(item.productId().value(), item.quantity()))
-                .toList();
+    private final OrderItemEntityMapper orderItemEntityMapper;
+
+    public OrderEntityMapper(OrderItemEntityMapper orderItemEntityMapper) {
+        this.orderItemEntityMapper = orderItemEntityMapper;
     }
 
     public OrderEntity toEntity(Order order) {
-        List<OrderItemEntity> itemEntities = toOrderItemEntity(order.items());
-        new OrderEntity();
+        List<OrderItemEntity> itemEntities = orderItemEntityMapper.toEntity(order.items());
         return new OrderEntity(order.id().value(), order.customerId().value(), order.status().name(), itemEntities, order.createdAt());
     }
 }

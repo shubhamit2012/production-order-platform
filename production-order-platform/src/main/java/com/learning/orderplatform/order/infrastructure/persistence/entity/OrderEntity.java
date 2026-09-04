@@ -1,31 +1,29 @@
 package com.learning.orderplatform.order.infrastructure.persistence.entity;
 
-import com.learning.orderplatform.order.domain.CustomerId;
-import com.learning.orderplatform.order.domain.OrderId;
-import com.learning.orderplatform.order.domain.OrderItem;
-import com.learning.orderplatform.order.domain.OrderStatus;
-
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
 public class OrderEntity {
 
-    private UUID orderId;
+    private UUID id;
     private UUID customerId;
-    private String orderStatus;
-    private List<OrderItemEntity> orderItems;
+    private String status;
+    private List<OrderItemEntity> items;
     private Instant createdAt;
 
-    public OrderEntity(UUID orderId,
+    public OrderEntity() {
+    }
+
+    public OrderEntity(UUID id,
                        UUID customerId,
-                       String orderStatus,
-                       List<OrderItemEntity> orderItems,
+                       String status,
+                       List<OrderItemEntity> items,
                        Instant createdAt) {
-        this.orderId = orderId;
+        this.id = id;
         this.customerId = customerId;
-        this.orderStatus = orderStatus;
-        this.orderItems = orderItems;
+        this.status = status;
+        this.items = items;
         this.createdAt = createdAt;
     }
 
