@@ -4,13 +4,15 @@ import com.learning.orderplatform.order.application.model.CreateOrderCommand;
 import com.learning.orderplatform.order.application.model.CreateOrderItem;
 import com.learning.orderplatform.order.domain.CustomerId;
 import com.learning.orderplatform.order.domain.ProductId;
+import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.util.List;
 
+@Component
 public class CreateOrderMapper {
 
-    public CreateOrderCommand toCreateOrderCommand(CreateOrderRequest request) {
+    public CreateOrderCommand toCommand(CreateOrderRequest request) {
         List<CreateOrderItem> createOrderItems = request.items().stream()
                 .map(item -> new CreateOrderItem(new ProductId(item.productId()), item.quantity()))
                 .toList();

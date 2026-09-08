@@ -3,15 +3,15 @@ package com.learning.orderplatform.order.api;
 import com.learning.orderplatform.order.application.model.CreateOrderCommand;
 import com.learning.orderplatform.order.application.port.in.CreateOrderUseCase;
 import com.learning.orderplatform.order.domain.OrderId;
-import org.springframework.http.HttpStatusCode;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.UUID;
-
-@RestController("/order")
+@RestController
+@RequestMapping("/order")
 public class OrderController {
 
     private final CreateOrderMapper createOrderMapper;
@@ -24,8 +24,8 @@ public class OrderController {
 
     @PostMapping()
     public ResponseEntity<CreateOrderResponse> createOrder(@RequestBody CreateOrderRequest createOrderRequest) {
-        CreateOrderCommand createOrderCommand = createOrderMapper.toCreateOrderCommand(createOrderRequest);
+        CreateOrderCommand createOrderCommand = createOrderMapper.toCommand(createOrderRequest);
         OrderId orderId = createOrderUseCase.create(createOrderCommand);
-        return new ResponseEntity<>(new CreateOrderResponse(orderId.value()), HttpStatusCode.valueOf(201));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new CreateOrderResponse(orderId.value()));
     }
 }
