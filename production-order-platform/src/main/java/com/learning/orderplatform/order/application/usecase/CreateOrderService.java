@@ -10,9 +10,11 @@ import com.learning.orderplatform.order.domain.Order;
 import com.learning.orderplatform.order.domain.OrderId;
 import com.learning.orderplatform.order.domain.OrderItem;
 import com.learning.orderplatform.order.domain.exceptions.InsufficientInventoryException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CreateOrderService implements CreateOrderUseCase {
 
     private final OrderIdGenerator orderIdGenerator;

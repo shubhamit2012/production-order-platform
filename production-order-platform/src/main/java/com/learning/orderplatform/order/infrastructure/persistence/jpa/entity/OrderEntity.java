@@ -1,9 +1,12 @@
 package com.learning.orderplatform.order.infrastructure.persistence.jpa.entity;
 
+import jakarta.persistence.Entity;
+
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
+@Entity
 public class OrderEntity {
 
     private UUID id;

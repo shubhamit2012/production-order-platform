@@ -1,7 +1,10 @@
 package com.learning.orderplatform.order.infrastructure.persistence.jpa.entity;
 
+import jakarta.persistence.Entity;
+
 import java.util.UUID;
 
+@Entity
 public class OrderItemEntity {
 
     private UUID productId;
