@@ -1,7 +1,7 @@
 package com.learning.orderplatform.order.infrastructure.persistence.mapper;
 
 import com.learning.orderplatform.order.domain.OrderItem;
-import com.learning.orderplatform.order.infrastructure.persistence.entity.OrderItemEntity;
+import com.learning.orderplatform.order.infrastructure.persistence.jpa.entity.OrderItemEntity;
 
 import java.util.List;
 

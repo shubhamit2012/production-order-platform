@@ -1,16 +1,17 @@
-package com.learning.orderplatform.order.infrastructure.persistence.repository;
+package com.learning.orderplatform.order.infrastructure.persistence.adapter;
 
 import com.learning.orderplatform.order.application.port.out.OrderRepository;
 import com.learning.orderplatform.order.domain.Order;
-import com.learning.orderplatform.order.infrastructure.persistence.entity.OrderEntity;
+import com.learning.orderplatform.order.infrastructure.persistence.jpa.entity.OrderEntity;
+import com.learning.orderplatform.order.infrastructure.persistence.jpa.repository.OrderEntityJPARepository;
 import com.learning.orderplatform.order.infrastructure.persistence.mapper.OrderEntityMapper;
 
-public class JpaOrderRepository implements OrderRepository {
+public class OrderRepositoryAdapter implements OrderRepository {
 
     private final OrderEntityMapper orderEntityMapper;
-    private final OrderEntityRepository orderEntityRepository;
+    private final OrderEntityJPARepository orderEntityRepository;
 
-    public JpaOrderRepository(OrderEntityMapper orderEntityMapper, OrderEntityRepository orderEntityRepository) {
+    public OrderRepositoryAdapter(OrderEntityMapper orderEntityMapper, OrderEntityJPARepository orderEntityRepository) {
         this.orderEntityMapper = orderEntityMapper;
         this.orderEntityRepository = orderEntityRepository;
     }

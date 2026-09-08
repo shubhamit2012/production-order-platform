@@ -1,4 +1,4 @@
-package com.learning.orderplatform.order.infrastructure.persistence.entity;
+package com.learning.orderplatform.order.infrastructure.persistence.jpa.entity;
 
 import java.time.Instant;
 import java.util.List;
