@@ -1,4 +1,7 @@
 package com.learning.orderplatform.order.api;
 
-public class CreateOrderResponse {
+import java.util.UUID;
+
+public record CreateOrderResponse(UUID orderId) {
+
 }
