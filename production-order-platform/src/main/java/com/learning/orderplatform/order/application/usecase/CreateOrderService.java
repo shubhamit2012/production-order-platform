@@ -35,8 +35,8 @@ public class CreateOrderService implements CreateOrderUseCase {
                 .map(item -> new InventoryReservationRequest(item.productId(), item.quantity()))
                 .toList();
 
-        boolean reserve = inventoryGateway.reserve(reservationRequests);
-        if (!reserve) {
+        boolean reserved = inventoryGateway.reserve(reservationRequests);
+        if (!reserved) {
             throw new InsufficientInventoryException("Inventory reservation failed");
         }
 
