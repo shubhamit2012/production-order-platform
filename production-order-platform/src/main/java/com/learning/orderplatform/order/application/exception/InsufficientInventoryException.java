@@ -1,4 +1,4 @@
-package com.learning.orderplatform.order.domain.exceptions;
+package com.learning.orderplatform.order.application.exception;
 
 public class InsufficientInventoryException extends RuntimeException {
     public InsufficientInventoryException(String message) {

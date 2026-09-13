@@ -1,4 +1,4 @@
-package com.learning.orderplatform.order.infrastructure.inventory;
+package com.learning.orderplatform.order.infrastructure.inventory.model;
 
 import java.util.UUID;
 

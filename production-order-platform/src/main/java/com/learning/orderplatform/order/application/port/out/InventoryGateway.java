@@ -1,11 +1,11 @@
 package com.learning.orderplatform.order.application.port.out;
 
-import com.learning.orderplatform.order.application.model.InventoryReservationRequest;
+import com.learning.orderplatform.order.application.model.InventoryReservation;
 
 import java.util.List;
 
 public interface InventoryGateway {
 
-    boolean reserve(List<InventoryReservationRequest> items);
+    void reserve(List<InventoryReservation> reservations);
 
 }
