@@ -1,4 +1,4 @@
-package com.learning.orderplatform.order.api;
+package com.learning.orderplatform.order.api.model;
 
 import java.util.UUID;
 

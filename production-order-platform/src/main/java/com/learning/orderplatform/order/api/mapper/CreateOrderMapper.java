@@ -1,5 +1,6 @@
-package com.learning.orderplatform.order.api;
+package com.learning.orderplatform.order.api.mapper;
 
+import com.learning.orderplatform.order.api.model.CreateOrderRequest;
 import com.learning.orderplatform.order.application.model.CreateOrderCommand;
 import com.learning.orderplatform.order.application.model.CreateOrderItem;
 import com.learning.orderplatform.order.domain.CustomerId;

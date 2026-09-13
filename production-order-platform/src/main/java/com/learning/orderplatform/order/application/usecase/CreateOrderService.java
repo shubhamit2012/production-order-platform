@@ -1,7 +1,7 @@
 package com.learning.orderplatform.order.application.usecase;
 
 import com.learning.orderplatform.order.application.model.CreateOrderCommand;
-import com.learning.orderplatform.order.application.model.InventoryReservationRequest;
+import com.learning.orderplatform.order.application.model.InventoryReservation;
 import com.learning.orderplatform.order.application.port.in.CreateOrderUseCase;
 import com.learning.orderplatform.order.application.port.out.InventoryGateway;
 import com.learning.orderplatform.order.application.port.out.OrderIdGenerator;
@@ -9,7 +9,6 @@ import com.learning.orderplatform.order.application.port.out.OrderRepository;
 import com.learning.orderplatform.order.domain.Order;
 import com.learning.orderplatform.order.domain.OrderId;
 import com.learning.orderplatform.order.domain.OrderItem;
-import com.learning.orderplatform.order.domain.exceptions.InsufficientInventoryException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,17 +27,14 @@ public class CreateOrderService implements CreateOrderUseCase {
     }
 
     @Override
-    public OrderId create(CreateOrderCommand command) throws InsufficientInventoryException {
+    public OrderId create(CreateOrderCommand command) {
         OrderId orderId = orderIdGenerator.next();
 
-        List<InventoryReservationRequest> reservationRequests = command.items().stream()
-                .map(item -> new InventoryReservationRequest(item.productId(), item.quantity()))
+        List<InventoryReservation> reservations = command.items().stream()
+                .map(item -> new InventoryReservation(item.productId(), item.quantity()))
                 .toList();
 
-        boolean reserved = inventoryGateway.reserve(reservationRequests);
-        if (!reserved) {
-            throw new InsufficientInventoryException("Inventory reservation failed");
-        }
+        inventoryGateway.reserve(reservations);
 
         List<OrderItem> orderItems = command.items().stream()
                 .map(item -> new OrderItem(item.productId(), item.quantity()))
