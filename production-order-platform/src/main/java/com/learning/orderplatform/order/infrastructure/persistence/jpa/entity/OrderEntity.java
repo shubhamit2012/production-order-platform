@@ -1,18 +1,29 @@
 package com.learning.orderplatform.order.infrastructure.persistence.jpa.entity;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Table(name = "orders")
 public class OrderEntity {
 
+    @Id
     private UUID id;
+
+    @Column(nullable = false)
     private UUID customerId;
+
+    @Column(nullable = false)
     private String status;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "order_id")
     private List<OrderItemEntity> items;
+
+    @Column(nullable = false)
     private Instant createdAt;
 
     public OrderEntity() {

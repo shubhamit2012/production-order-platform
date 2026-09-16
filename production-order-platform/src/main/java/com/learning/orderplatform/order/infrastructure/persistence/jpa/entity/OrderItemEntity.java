@@ -1,13 +1,21 @@
 package com.learning.orderplatform.order.infrastructure.persistence.jpa.entity;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
 @Entity
+@Table(name = "order_items")
 public class OrderItemEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
+    @Column(nullable = false)
     private UUID productId;
+
+    @Column(nullable = false)
     private int quantity;
 
     public OrderItemEntity() {
