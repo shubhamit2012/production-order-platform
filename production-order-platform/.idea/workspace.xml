@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a5740a6c-ec9e-4b4a-9053-42de911e93f3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/OrderPlatformApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/api/controller/OrderController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/api/exception/GlobalExceptionHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/api/mapper/CreateOrderMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/api/model/CreateOrderItemRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/api/model/CreateOrderRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/api/model/CreateOrderResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/api/model/ErrorResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/application/exception/InsufficientInventoryException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/application/model/CreateOrderCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/application/model/CreateOrderItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/application/model/InventoryReservation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/application/port/in/CreateOrderUseCase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/application/port/out/InventoryGateway.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/application/port/out/OrderIdGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/application/port/out/OrderRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/application/usecase/CreateOrderService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/domain/CustomerId.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/domain/DomainEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/domain/Order.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/domain/OrderCreatedEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/domain/OrderId.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/domain/OrderItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/domain/OrderStatus.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/domain/ProductId.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/infrastructure/generator/UUIDOrderIdGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/infrastructure/inventory/adapter/RestInventoryGateway.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/infrastructure/inventory/mapper/InventoryMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/infrastructure/inventory/model/InventoryRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/infrastructure/inventory/model/InventoryResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/infrastructure/persistence/adapter/OrderRepositoryAdapter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/infrastructure/persistence/jpa/entity/OrderEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/infrastructure/persistence/jpa/entity/OrderItemEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/infrastructure/persistence/jpa/repository/OrderEntityJPARepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/infrastructure/persistence/mapper/OrderEntityMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/learning/orderplatform/order/infrastructure/persistence/mapper/OrderItemEntityMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/learning/orderplatform/ProductionOrderPlatformApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_/Users/shubhamsrivastava/Library/CloudStorage/OneDrive-kyndryl/Personal/learnings/production-order-platform/order-service" value="3JSqcs7PYFyr0f9MWzqt0ERBvpA" />
+      <entry key="_/Users/shubhamsrivastava/Library/CloudStorage/OneDrive-kyndryl/Personal/learnings/production-order-platform/production-order-platform" value="3IV4tA4aWtaG0yO27iYcxIqJr8r" />
+    </persistenceIdMap>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Record" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;shubhamit2012&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/shubhamit2012/production-order-platform.git&quot;,
+    &quot;accountId&quot;: &quot;6df4b17d-e112-4f6d-a943-9343a5e3191b&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="MavenRunner">
+    <option name="skipTests" value="true" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="3IV4tA4aWtaG0yO27iYcxIqJr8r" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ProductionOrderPlatformApplicationTests.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Test.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.ProductionOrderPlatformApplicationTests.contextLoads.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.order-platform [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.order-service [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.OrderPlatformApplication.executor&quot;: &quot;Debug&quot;,
+    &quot;Spring Boot.order-service.executor&quot;: &quot;Debug&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/inventory-service-bootstrap&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.learning.orderplatform.order.application.exception" />
+      <recent name="com.learning.orderplatform.order.domain" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.learning.orderplatform.order.application.exception" />
+      <recent name="com.learning.orderplatform.order.infrastructure.persistence.mapper" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.order-service">
+    <configuration name="ProductionOrderPlatformApplicationTests" type="Application" factoryName="Application" activateToolWindowBeforeRun="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.learning.orderservice.ProductionOrderPlatformApplicationTests" />
+      <module name="order-platform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.learning.orderservice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.learning.orderplatform.infrastructure.Test" />
+      <module name="order-platform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.learning.orderservice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductionOrderPlatformApplicationTests.contextLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="order-platform" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.learning.orderservice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.learning.orderplatform" />
+      <option name="MAIN_CLASS_NAME" value="com.learning.orderservice.ProductionOrderPlatformApplicationTests" />
+      <option name="METHOD_NAME" value="contextLoads" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="production-order-platform" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="production-order-platform" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
+    <configuration name="order-service" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
+      <module name="order-platform" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.learning.orderservice.OrderPlatformApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.learning.orderservice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Test" />
+      <item itemvalue="Application.ProductionOrderPlatformApplicationTests" />
+      <item itemvalue="JUnit.ProductionOrderPlatformApplicationTests.contextLoads" />
+      <item itemvalue="Spring Boot.order-service" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.order-service" />
+        <item itemvalue="Application.Test" />
+        <item itemvalue="JUnit.ProductionOrderPlatformApplicationTests.contextLoads" />
+        <item itemvalue="Application.ProductionOrderPlatformApplicationTests" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.31033.145" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a5740a6c-ec9e-4b4a-9053-42de911e93f3" name="Changes" comment="" />
+      <created>1787836614745</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1787836614745</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>
