@@ -6,10 +6,10 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.learning.orderservice"})
-public class OrderPlatformApplication {
+public class OrderServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(OrderPlatformApplication.class, args);
+        SpringApplication.run(OrderServiceApplication.class, args);
     }
 
 }
