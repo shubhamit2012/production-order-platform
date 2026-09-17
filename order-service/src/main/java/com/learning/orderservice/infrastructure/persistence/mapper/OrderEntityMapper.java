@@ -1,0 +1,23 @@
+package com.learning.orderservice.infrastructure.persistence.mapper;
+
+import com.learning.orderservice.domain.Order;
+import com.learning.orderservice.infrastructure.persistence.jpa.entity.OrderEntity;
+import com.learning.orderservice.infrastructure.persistence.jpa.entity.OrderItemEntity;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Component
+public class OrderEntityMapper {
+
+    private final OrderItemEntityMapper orderItemEntityMapper;
+
+    public OrderEntityMapper(OrderItemEntityMapper orderItemEntityMapper) {
+        this.orderItemEntityMapper = orderItemEntityMapper;
+    }
+
+    public OrderEntity toEntity(Order order) {
+        List<OrderItemEntity> itemEntities = orderItemEntityMapper.toEntity(order.items());
+        return new OrderEntity(order.id().value(), order.customerId().value(), order.status().name(), itemEntities, order.createdAt());
+    }
+}
