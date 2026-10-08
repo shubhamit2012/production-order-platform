@@ -56,7 +56,7 @@ public class Inventory {
         return new Inventory(id, productId, reservedQuantity - quantity, availableQuantity + quantity);
     }
 
-    public Inventory restock(int quantity) {
+        public Inventory restock(int quantity) {
         if (quantity <= 0) {
             throw new IllegalArgumentException("Quantity to restock must be greater than zero");
         }
