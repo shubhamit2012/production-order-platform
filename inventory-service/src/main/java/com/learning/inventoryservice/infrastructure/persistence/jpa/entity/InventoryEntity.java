@@ -33,6 +33,20 @@ public class InventoryEntity {
         this.availableQuantity = availableQuantity;
     }
 
+    public UUID id() {
+        return id;
+    }
 
+    public UUID productId() {
+        return productId;
+    }
+
+    public int reservedQuantity() {
+        return reservedQuantity;
+    }
+
+    public int availableQuantity() {
+        return availableQuantity;
+    }
 
 }
