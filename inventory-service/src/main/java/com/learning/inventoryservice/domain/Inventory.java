@@ -1,6 +1,7 @@
 package com.learning.inventoryservice.domain;
 
 import com.learning.inventoryservice.application.exception.InsufficientInventoryException;
+import com.learning.inventoryservice.application.exception.InvalidInventoryReservationException;
 
 public class Inventory {
 
@@ -34,7 +35,7 @@ public class Inventory {
 
     public Inventory reserve(int quantity) {
         if (quantity <= 0) {
-            throw new IllegalArgumentException("Quantity to reserve must be greater than zero");
+            throw new InvalidInventoryReservationException("Quantity to reserve must be greater than zero");
         }
 
         if (quantity > availableQuantity) {
@@ -46,7 +47,7 @@ public class Inventory {
 
     public Inventory release(int quantity) {
         if (quantity <= 0) {
-            throw new IllegalArgumentException("Quantity to release must be greater than zero");
+            throw new InvalidInventoryReservationException("Quantity to release must be greater than zero");
         }
 
         if (quantity > reservedQuantity) {
@@ -58,7 +59,7 @@ public class Inventory {
 
         public Inventory restock(int quantity) {
         if (quantity <= 0) {
-            throw new IllegalArgumentException("Quantity to restock must be greater than zero");
+            throw new InvalidInventoryReservationException("Quantity to restock must be greater than zero");
         }
 
         return new Inventory(id, productId, reservedQuantity, availableQuantity + quantity);
