@@ -2,6 +2,7 @@ package com.learning.orderservice.api.exception;
 
 import com.learning.orderservice.api.model.ErrorResponse;
 import com.learning.orderservice.application.exception.InsufficientInventoryException;
+import com.learning.orderservice.application.exception.InvalidInventoryReservationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,18 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.CONFLICT)
                 .body(new ErrorResponse(
                         "INSUFFICIENT_INVENTORY",
+                        ex.getMessage()
+                ));
+    }
+
+    @ExceptionHandler(InvalidInventoryReservationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorResponse> handleInvalidInventoryInventory(InvalidInventoryReservationException ex) {
+        logger.warn("Invalid inventory exception occurred: {}", ex.getMessage(), ex);
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorResponse(
+                        "INVALID_INVENTORY",
                         ex.getMessage()
                 ));
     }
