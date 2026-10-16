@@ -20,14 +20,16 @@ public class InventoryController {
     private final ReserveInventoryUseCase reservationUseCase;
     private final ReserveInventoryMapper reserveInventoryMapper;
 
-    public InventoryController(ReserveInventoryUseCase reservationUseCase, ReserveInventoryMapper reserveInventoryMapper) {
+    public InventoryController(ReserveInventoryUseCase reservationUseCase,
+            ReserveInventoryMapper reserveInventoryMapper) {
         this.reservationUseCase = reservationUseCase;
         this.reserveInventoryMapper = reserveInventoryMapper;
     }
 
     @PostMapping
     public ResponseEntity<String> reserve(@RequestBody List<ReserveInventoryItems> reserveInventoryItems) {
-        ReserveInventoryCommand reserveInventoryCommand = reserveInventoryMapper.toCommandFromItems(reserveInventoryItems);
+        ReserveInventoryCommand reserveInventoryCommand = reserveInventoryMapper
+                .toCommandFromItems(reserveInventoryItems);
         reservationUseCase.reserve(reserveInventoryCommand);
         return ResponseEntity.status(HttpStatus.CREATED).body("Inventory reserved successfully");
     }

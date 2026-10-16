@@ -14,8 +14,7 @@ public class InventoryEntityMapper {
                 inventory.id().value(),
                 inventory.productId().value(),
                 inventory.reservedQuantity(),
-                inventory.availableQuantity()
-        );
+                inventory.availableQuantity());
     }
 
     public Inventory toDomain(InventoryEntity inventoryEntity) {
@@ -23,7 +22,6 @@ public class InventoryEntityMapper {
                 new InventoryId(inventoryEntity.id()),
                 new ProductId(inventoryEntity.productId()),
                 inventoryEntity.reservedQuantity(),
-                inventoryEntity.availableQuantity()
-        );
+                inventoryEntity.availableQuantity());
     }
 }
