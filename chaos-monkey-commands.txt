@@ -1,0 +1,55 @@
+curl -X POST http://127.0.0.1:8082/actuator/chaosmonkey/enable
+
+curl -X POST http://127.0.0.1:8082/actuator/chaosmonkey/watchers \
+  -H 'Content-Type: application/json' \
+  -d '{"controller":false,"restController":false,"service":true}'
+
+curl -X POST http://localhost:8082/actuator/chaosmonkey/assaults \
+-H "Content-Type: application/json" \
+-d '{
+"level": 1,
+"latencyActive": true,
+"latencyRangeStart": 5000,
+"latencyRangeEnd": 5000
+}'
+
+curl -X POST http://127.0.0.1:8082/actuator/chaosmonkey/disable
+
+
+ToxiProxi
+
+curl -X POST http://localhost:8474/proxies \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "inventory_proxy",
+    "listen": "0.0.0.0:8500",
+    "upstream": "inventory-service:8081"
+  }'
+
+
+curl -X POST http://localhost:8474/proxies/inventory_proxy/toxics \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "conn_timeout",
+    "type": "timeout",
+    "stream": "upstream",
+    "toxicity": 1.0,
+    "attributes": {
+      "timeout": 10000
+    }
+  }'
+
+curl -X POST http://localhost:8474/proxies/inventory_proxy/toxics \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "instant_reject",
+    "type": "reset_peer",
+    "stream": "downstream",
+    "toxicity": 1.0,
+    "attributes": {
+      "timeout": 0
+    }
+  }'
+
+curl -X DELETE http://localhost:8474/proxies/inventory_proxy/toxics/instant_reject
+

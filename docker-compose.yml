@@ -20,10 +20,14 @@ services:
     build: ./inventory-service
     container_name: inventory-service
     restart: on-failure
+    environment:
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5006"
     env_file:
       - ./inventory-service/.env
     ports:
       - "8081:8081"
+      - "127.0.0.1:8082:8082"
+      - "127.0.0.1:5006:5006"
     depends_on:
       postgres:
         condition: service_healthy
@@ -32,15 +36,26 @@ services:
     build: ./order-service
     container_name: order-service
     restart: on-failure
+    environment:
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
+      INVENTORY_SERVICE_BASE_URL: "http://toxiproxy:8500"
     env_file:
       - ./order-service/.env
     ports:
       - "8080:8080"
+      - "127.0.0.1:5005:5005"
     depends_on:
       postgres:
         condition: service_healthy
       inventory-service:
         condition: service_started
+
+  toxiproxy:
+    image: ghcr.io/shopify/toxiproxy:2.13.0
+    container_name: m_toxiproxy
+    ports:
+      - "8474:8474" # Toxiproxy Management API (controlled via host machine curl)
+      - "8500:8500" # The chaotic proxy bridge port
 
 volumes:
   production-order-db-data:

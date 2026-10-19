@@ -9,8 +9,9 @@ import org.springframework.web.client.RestClient;
 public class InventoryClientConfiguration {
 
     @Bean
-    RestClient inventoryRestClient(@Value("${inventory.service.base-url}") String baseUrl) {
-        return RestClient.builder()
+    RestClient inventoryRestClient(RestClient.Builder builder,
+            @Value("${inventory.service.base-url}") String baseUrl) {
+        return builder
                 .baseUrl(baseUrl)
                 .build();
     }

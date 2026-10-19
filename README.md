@@ -39,6 +39,111 @@ Each service migrates its own schema on startup from `src/main/resources/db/migr
 
 Add changes as new versioned files (e.g. `V3__add_column.sql`); never edit an applied migration.
 
+## Local Chaos Monkey experiments
+
+Inventory Service includes Chaos Monkey 4.0.0, Actuator, and the Spring Boot 4
+AspectJ and RestClient starters. Container configuration lives in
+`inventory-service/.env`, loaded by the single `docker-compose.yml`. The single
+Inventory `application.properties` maps these environment values with safe defaults.
+Start from the repository root:
+
+```bash
+podman compose up -d --build
+```
+
+The environment file selects the `chaos-monkey` profile and configures management
+to listen on `0.0.0.0:8082` inside the container. Compose publishes management only
+on the host's `127.0.0.1:8082`. The API remains on port 8081. Management controls
+are unauthenticated and intended only for local development; do not expose or proxy
+them to an untrusted network.
+
+Only the service watcher is enabled, avoiding duplicate delays at the controller
+and service layers. Injection starts disabled. To persist a five-second delay for
+every service call, change these values in `inventory-service/.env`:
+
+```dotenv
+CHAOS_MONKEY_ENABLED=true
+CHAOS_MONKEY_ASSAULTS_LEVEL=1
+CHAOS_MONKEY_ASSAULTS_LATENCY_ACTIVE=true
+CHAOS_MONKEY_ASSAULTS_LATENCY_RANGE_START=5000
+CHAOS_MONKEY_ASSAULTS_LATENCY_RANGE_END=5000
+CHAOS_MONKEY_ASSAULTS_EXCEPTIONS_ACTIVE=false
+```
+
+Recreate the container with `podman compose up -d --build` after changing `.env`;
+`restart` does not reload container environment values. Set both
+`CHAOS_MONKEY_ENABLED=false` and `CHAOS_MONKEY_ASSAULTS_LATENCY_ACTIVE=false` to
+disable the experiment persistently. Do not commit credentials stored in `.env`.
+
+Check the effective runtime configuration on port **8082**, not port 8081:
+
+```bash
+curl --fail http://127.0.0.1:8082/actuator/chaosmonkey/status
+curl --fail http://127.0.0.1:8082/actuator/chaosmonkey/assaults
+curl --fail http://127.0.0.1:8082/actuator/health
+```
+
+The expected initial responses include `"enabled":false` and `"status":"UP"`.
+Publishing port 8082 does not enable fault injection. On Podman Compose versions
+that cannot recreate Inventory because Order depends on it, recreate the two local
+application containers explicitly (this briefly interrupts both APIs):
+
+```bash
+podman compose build inventory-service
+podman stop order-service inventory-service
+podman rm order-service inventory-service
+podman compose up -d --no-recreate --no-build inventory-service order-service
+```
+
+These commands do not remove database volumes. Do not use `down -v` to resolve
+port or container dependency issues.
+
+Actuator updates are temporary and reset to `.env` values when the container is
+recreated. To configure exceptions temporarily instead of latency, then enable injection:
+
+```bash
+curl http://127.0.0.1:8082/actuator/chaosmonkey/status
+curl -X POST http://127.0.0.1:8082/actuator/chaosmonkey/assaults \
+  -H 'Content-Type: application/json' \
+  -d '{"level":1,"exceptionsActive":true,"latencyActive":false}'
+curl -X POST http://127.0.0.1:8082/actuator/chaosmonkey/enable
+```
+
+Inventory reservation requests now return the standard sanitized 500 response.
+To experiment with latency instead, update the assault configuration:
+
+```bash
+curl -X POST http://127.0.0.1:8082/actuator/chaosmonkey/assaults \
+  -H 'Content-Type: application/json' \
+  -d '{"level":1,"exceptionsActive":false,"latencyActive":true,"latencyRangeStart":2000,"latencyRangeEnd":3000}'
+```
+
+Stop injection after the experiment:
+
+```bash
+curl -X POST http://127.0.0.1:8082/actuator/chaosmonkey/disable
+```
+
+The automated `ChaosMonkeyIntegrationTest` uses random application and management
+ports to verify disabled startup, exception injection, health access, and recovery.
+
+## Inventory client timeouts
+
+Order Service uses Spring Boot's injected `RestClient.Builder` so the HTTP client
+inherits Boot configuration. In Boot 4.1, the settings are
+`spring.http.clients.connect-timeout` and `spring.http.clients.read-timeout`,
+without a `restclient` segment. They default to 3s and 5s here and can be overridden
+with `INVENTORY_CONNECT_TIMEOUT` and `INVENTORY_READ_TIMEOUT` in `order-service/.env`.
+Rebuild and recreate the Order container after code changes; recreate it after
+environment changes.
+
+To check the five-second read timeout using Chaos Monkey, inject a delay longer
+than five seconds (for example, eight seconds), with only the service watcher
+enabled. A delay exactly equal to the timeout is a boundary case. A timeout maps
+to the existing 503 inventory-service error and is not retried. A client timeout
+does not cancel the Inventory transaction; do not assume the reservation failed
+or blindly replay the order.
+
 ## Logging
 
 Both services use SLF4J with Spring Boot's console logging:
