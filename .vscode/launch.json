@@ -1,4 +1,5 @@
 {
+    "version": "0.2.0",
     "configurations": [
         {
             "type": "java",
@@ -9,6 +10,32 @@
             "projectName": "order-service",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Attach to Order Container",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 5005,
+            "projectName": "order-service"
+        },
+        {
+            "type": "java",
+            "name": "Attach to Inventory Container",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 5006,
+            "projectName": "inventory-service"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Attach to Both Containers",
+            "configurations": [
+                "Attach to Order Container",
+                "Attach to Inventory Container"
+            ],
+            "stopAll": true
         }
     ]
 }

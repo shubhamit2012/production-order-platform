@@ -2,6 +2,7 @@ package com.learning.orderservice.infrastructure.inventory.adapter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClientResponseException;
@@ -16,23 +17,26 @@ public class InventoryRetryPolicy {
 
     private static final Logger logger = LoggerFactory.getLogger(InventoryRetryPolicy.class);
 
-    private static final int MAX_ATTEMPTS = 3;
-    private static final long INITIAL_BACKOFF_MS = 2000;
+    @Value("${inventory.retry.maxAttempts:3}")
+    private int maxAttempts;
+    
+    @Value ("${inventory.retry.initialBackoffMs:2000}")
+    private long initialBackoffMs;
 
     public <T> T execute(Supplier<T> operation) {
 
-        for (int attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+        for (int attempt = 1; attempt <= maxAttempts; attempt++) {
             try {
-                logger.debug("Executing inventory operation: attempt={}, maxAttempts={}", attempt, MAX_ATTEMPTS);
+                logger.debug("Executing inventory operation: attempt={}, maxAttempts={}", attempt, maxAttempts);
                 return operation.get();
             } catch (RuntimeException ex) {
-                if (attempt == MAX_ATTEMPTS || !isRetryable(ex)) {
+                if (attempt == maxAttempts || !isRetryable(ex)) {
                     logger.debug("Inventory operation stopped: attempt={}, maxAttempts={}, failureType={}",
-                        attempt, MAX_ATTEMPTS, ex.getClass().getSimpleName());
+                        attempt, maxAttempts, ex.getClass().getSimpleName());
                     throw ex;
                 }
                 logger.warn("Retrying inventory operation: nextAttempt={}, maxAttempts={}, backoffMs={}, failureType={}",
-                    attempt + 1, MAX_ATTEMPTS, INITIAL_BACKOFF_MS, ex.getClass().getSimpleName());
+                    attempt + 1, maxAttempts, initialBackoffMs, ex.getClass().getSimpleName());
                 waitBeforeRetry(attempt);
             }
         }
@@ -71,10 +75,10 @@ public class InventoryRetryPolicy {
 
     private void waitBeforeRetry(int attempt) {
         //Use it for exponential backoff
-        // long delayMs = INITIAL_BACKOFF_MS * (1L << (attempt - 1));
+        // long delayMs = initialBackoffMs * (1L << (attempt - 1));
 
         //Use fixed backoff for retries
-        long delayMs = INITIAL_BACKOFF_MS;
+        long delayMs = initialBackoffMs;
         try {
             Thread.sleep(delayMs);
         } catch (InterruptedException interruptedException) {
